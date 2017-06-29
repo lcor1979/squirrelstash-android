@@ -7,7 +7,7 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "org.squirrelstash"
-        minSdkVersion 25
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -36,13 +36,19 @@ dependencies {
     testImplementation 'com.nhaarman:mockito-kotlin:0.7.0'
 
     // Utils
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // RxJava & RxAndroid
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // Kapsule
-    compile 'space.traversal.kapsule:kapsule-core:0.2'
+    implementation 'space.traversal.kapsule:kapsule-core:0.2'
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:11.0.1'
+    implementation 'com.google.firebase:firebase-auth:11.0.1'
+    implementation 'com.google.android.gms:play-services-auth:11.0.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

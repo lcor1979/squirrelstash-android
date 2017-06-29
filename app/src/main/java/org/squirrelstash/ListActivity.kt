@@ -2,13 +2,13 @@ package org.squirrelstash
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.content_list.*
 
-class ListActivity : AppCompatActivity() {
+class ListActivity : SecuredActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,8 +16,7 @@ class ListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         add.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            signOut()
         }
     }
 
@@ -34,6 +33,24 @@ class ListActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onSignOut() {
+        signIn()
+    }
+
+    override fun onUser(user: FirebaseUser?) {
+        super.onUser(user)
+
+        contentText?.text = user?.displayName ?: "No user"
+
+        if (user != null) {
+            Snackbar.make(add, "User: ${user.displayName}", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        } else {
+            Snackbar.make(add, "No user !", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
         }
     }
 }
